@@ -35,20 +35,21 @@ class Projects extends Trongate {
      * @return void
      */
     public function edit(): void {
-        $update_id = segment(3, 'int');
+        $current_slug = segment(3);
         $submit = post('submit');
 
-        if ($update_id===0 || $submit==='submit') {
+        if ($current_slug==='' || $submit==='submit') {
             $data = $this->model->get_data_from_post();
+            $data['headline'] = 'Create Project';
         } else {
-            $data = $this->model->get_data_from_db($update_id);
+            $data = $this->model->get_data_from_db($current_slug);
+            $data['headline'] = 'Update Project';
         }
 
-        $data['headline'] = ($update_id===0)?'Create Project':'Update Project';
-        $data['update_id'] = $update_id;
         $data['form_location'] = str_replace('/edit', '/submit', current_url());
         $data['view_module'] = 'projects';
         $data['view_file'] = 'edit';
+        
         $this->templates->admin($data);
     }
 
@@ -67,17 +68,17 @@ class Projects extends Trongate {
 
         if ($result===true) {
             $data = $this->model->get_data_from_post();
+            $current_slug = segment(3);
 
-            $update_id = segment(3, 'int');
-            if ($update_id===0) {
+            if (empty($current_slug)) {
                 //create new record.
                 $this->db->insert($data, 'projects');
                 set_flashdata('The new project was successfully created.');
-                } else {
-                    // update record
-                    $this->db->update($update_id, $data, 'projects');
-                    set_flashdata('The project was successfully updated.');
-                }
+            } else {
+                // update record
+                $this->db->update($data['id'], $data, 'projects');
+                set_flashdata('The project was successfully updated.');
+            }
             redirect('projects');
         } else {
             $this->edit();
@@ -91,16 +92,11 @@ class Projects extends Trongate {
      */
     public function confirm_delete(): void {
         $this->trongate_security->make_sure_allowed();
-        $update_id = segment(3, 'int');
-        $this->model->get_data_from_db($update_id); // will say 'project not found' if nonexistant
-        
-
-        $data = [
-            'update_id' => $update_id,
-            'form_location' => str_replace('/confirm_delete', '/submit_confirmation_delete', current_url()),
-            'view_module' => 'projects',
-            'view_file' => 'confirm_delete'
-        ];
+        $slug = segment(3);
+        $data = $this->model->get_data_from_db($slug); // will say 'project not found' if nonexistant
+        $data['form_location'] = str_replace('/confirm_delete', '/submit_confirmation_delete', current_url());
+        $data['view_module'] = 'projects';
+        $data['view_file'] = 'confirm_delete';
 
         $this->templates->admin($data);
     }
@@ -113,9 +109,9 @@ class Projects extends Trongate {
     public function submit_confirmation_delete(): void {
         $this->trongate_security->make_sure_allowed();
 
-        $update_id = (int) post('update_id');
-        $this->db->delete($update_id, 'projects');
+        $id = (int) post('id');
+        $this->db->delete($id, 'projects');
         set_flashdata('The project record was successfully deleted.');
-        redirect('projects/manage');
+        redirect('projects/list');
     }
 }

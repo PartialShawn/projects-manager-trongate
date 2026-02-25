@@ -1,6 +1,9 @@
 <h1>Manage Tasks</h1>
 <?= flashdata() ?>
-<p><?= anchor('projects-tasks/edit/'.$slug, 'Create New Task', array('class'=>'button alt')) ?></p>
+<p>
+    <?= anchor('projects-tasks/edit/'.$slug, 'Create New Task', array('class'=>'button alt')) ?>
+    <?= anchor('projects/edit/'.$slug, 'Edit Project', array('class'=>'button alt')) ?>
+</p>
 
 <?php
 if (empty($tasks)) {

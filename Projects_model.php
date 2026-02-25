@@ -16,6 +16,7 @@ class Projects_model extends Model {
         $data = [
             'project_title'=>post('project_title', true),
             'slug'=>post('slug', true),
+            'id'=>post('id', true),
             'description'=>post('description', true),
         ];
 
@@ -29,16 +30,24 @@ class Projects_model extends Model {
      * @param int $update_id
      * @return array<string, mixed>
      */
-    public function get_data_from_db($update_id): array {
-        $record_obj = $this->db->get_where($update_id, 'projects');
+    public function get_data_from_db(string $proj_slug): array {
+        // $record_obj = $this->db->get_where($update_id, 'projects');
 
-        if ($record_obj===false) {
+        
+        $params = [
+            'slug' => $proj_slug
+        ];
+
+        $sql = 'SELECT * FROM projects WHERE slug = :slug';
+        $result = $this->db->query_bind($sql, $params, 'object');
+
+        if ($result===false || count($result) == 0) {
             http_response_code(404);
-            echo 'Project not found';
+            echo 'Project not found: '.$proj_slug;
             die;
         }
 
-        $project = (array) $record_obj;
+        $project = (array) $result[0];
         return $project;
     }
 

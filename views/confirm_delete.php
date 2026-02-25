@@ -5,8 +5,8 @@
         <p>You are about to delete a project record. This cannot be undone.</p>
         <?php
         echo form_open($form_location);
-        echo form_hidden('update_id', $update_id);
-        echo anchor('projects/create/'.$update_id, 'Cancel', array('class'=>'button alt'));
+        echo form_hidden('id', $id);
+        echo anchor('projects/edit/'.$slug, 'Cancel', array('class'=>'button alt'));
         echo form_submit('submit', 'Delete Project', array('class'=>'danger'));
         echo form_close();
         ?>

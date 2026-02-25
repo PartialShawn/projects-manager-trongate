@@ -11,16 +11,18 @@
 
         echo form_label('Slug');
         echo validation_errors('slug');
-        echo form_input('slug', $project_title, array('placeholder'=>'project slug', 'autocomplete'=>'off'));
+        echo form_input('slug', $slug, array('placeholder'=>'project slug', 'autocomplete'=>'off'));
 
         echo form_label('Description');
         echo validation_errors('description');
         echo form_textarea('description', $description, array('placeholder'=>'Enter project details here'));
 
+        echo form_hidden('id', $id);
+
         echo '<div class="text-center">';
-        echo anchor('projects', 'Cancel', array('class'=>'button alt'));
-        if ($update_id > 0) {
-            echo anchor('projects/confirm_delete/'.$update_id, 'Delete project', array('class'=>'button danger'));
+        echo anchor('projects-tasks/list/'.$slug, 'Cancel', array('class'=>'button alt'));
+        if ($slug > 0) {
+            echo anchor('projects/confirm_delete/'.$slug, 'Delete project', array('class'=>'button danger'));
         }
         echo form_submit('submit', 'Submit');
         echo '</div>';
