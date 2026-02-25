@@ -34,17 +34,6 @@ CREATE TABLE `projects` (
   `description` mediumtext NOT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
---
--- Dumping data for table `projects`
---
-
-INSERT INTO `projects` (`id`, `slug`, `project_title`, `description`) VALUES
-(10, 'alpha', 'Alpha1', 'This is the first item created in the projects list.'),
-(11, 'beta-', 'Beta!', '222222 two 2222 two 22222 two.'),
-(12, 'gamma', 'Gamma', 'Create Project Project Details'),
-(13, 'Delta', 'Delta', '4..'),
-(14, 'epsilon', 'Epsilon', 'Test in new location.'),
-(15, 'zeta-', 'Zeta-', 'zeta zeta');
 
 --
 -- Indexes for dumped tables
