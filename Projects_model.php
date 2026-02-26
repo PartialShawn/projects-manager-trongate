@@ -31,23 +31,15 @@ class Projects_model extends Model {
      * @return array<string, mixed>
      */
     public function get_data_from_db(string $proj_slug): array {
-        // $record_obj = $this->db->get_where($update_id, 'projects');
+        $result = $this->db->get_one_where('slug', $proj_slug, 'projects');
 
-        
-        $params = [
-            'slug' => $proj_slug
-        ];
-
-        $sql = 'SELECT * FROM projects WHERE slug = :slug';
-        $result = $this->db->query_bind($sql, $params, 'object');
-
-        if ($result===false || count($result) == 0) {
+        if ($result===false) {
             http_response_code(404);
             echo 'Project not found: '.$proj_slug;
             die;
         }
 
-        $project = (array) $result[0];
+        $project = (array) $result;
         return $project;
     }
 
