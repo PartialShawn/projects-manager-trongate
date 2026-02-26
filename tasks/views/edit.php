@@ -1,6 +1,5 @@
-<h1><?=$headline?></h1>
 <div class="card">
-    <div class="card-heading">Task Details</div>
+    <div class="card-heading"><?=$headline?></div>
     <div class="card-body">
         <?php
         echo form_open($form_location, array('class'=>'highlight-errors'));

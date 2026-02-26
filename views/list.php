@@ -1,6 +1,6 @@
 <h1>Projects</h1>
 <?= flashdata() ?>
-<p><?= anchor('projects/edit', 'Create New Projects', array('class'=>'button alt')) ?></p>
+<p><?= anchor('projects/edit', 'Create New Project', array('class'=>'button alt')) ?></p>
 
 <?php
 if (empty($projects)) {

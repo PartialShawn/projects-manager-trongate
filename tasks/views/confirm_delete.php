@@ -1,4 +1,3 @@
-<h1>Are you sure?</h1>
 <div class="card">
     <div class="card-heading">Confirm Delete</div>
     <div class="card-body">
