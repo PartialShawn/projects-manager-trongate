@@ -19,9 +19,9 @@
         echo '</label>';
 
         echo '<div class="text-center">';
-        echo anchor('projects-tasks/list/'.$slug, 'Cancel', array('class'=>'button alt'));
+        echo anchor("project/{$slug}", 'Cancel', array('class'=>'button alt'));
         if ($update_id > 0) {
-            echo anchor('projects-tasks/confirm_delete/'.$slug.'/'.$update_id, 'Delete Task', array('class'=>'button danger'));
+            echo anchor("project/{$slug}/task/{$update_id}/confirm_delete", 'Delete Task', array('class'=>'button danger'));
         }
         echo form_submit('submit', 'Submit');
         echo '</div>';

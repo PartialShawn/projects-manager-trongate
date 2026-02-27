@@ -5,7 +5,7 @@
         <?php
         echo form_open($form_location);
         echo form_hidden('update_id', $update_id);
-        echo anchor('projects-tasks/edit/'.$slug.'/'.$update_id, 'Cancel', array('class'=>'button alt'));
+        echo anchor("project/{$slug}", 'Cancel', array('class'=>'button alt'));
         echo form_submit('submit', 'Delete Task', array('class'=>'danger'));
         echo form_close();
         ?>

@@ -50,7 +50,8 @@ class Tasks extends Trongate {
         $data['headline'] = ($update_id===0)?'Create Task':'Update Task';
         $data['slug'] = $slug;
         $data['update_id'] = $update_id;
-        $data['form_location'] = str_replace('/edit', '/submit', current_url());
+        // $data['form_location'] = str_replace('/edit', '/submit', current_url());
+        $data['form_location'] = "projects-tasks/submit/{$slug}/{$update_id}";
         $data['view_module'] = 'projects/tasks';
         $data['view_file'] = 'edit';
         $this->templates->admin($data);
@@ -83,7 +84,7 @@ class Tasks extends Trongate {
                 $this->db->update($update_id, $data, 'projects_tasks');
                 set_flashdata('The task was successfully updated.');
             }
-            redirect('projects-tasks/list/'.$slug);
+            redirect("project/{$slug}");
         } else {
             $this->edit();
         }
@@ -124,6 +125,6 @@ class Tasks extends Trongate {
         $update_id = (int) post('update_id');
         $this->db->delete($update_id, 'projects_tasks');
         set_flashdata('The task record was successfully deleted.');
-        redirect('projects-tasks/list/'.$slug);
+        redirect("project/{$slug}");
     }
 }

@@ -5,7 +5,7 @@
         <?php
         echo form_open($form_location);
         echo form_hidden('id', $id);
-        echo anchor('projects/edit/'.$slug, 'Cancel', array('class'=>'button alt'));
+        echo anchor('project/'.$slug, 'Cancel', array('class'=>'button alt'));
         echo form_submit('submit', 'Delete Project', array('class'=>'danger'));
         echo form_close();
         ?>

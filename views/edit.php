@@ -19,9 +19,9 @@
         echo form_hidden('id', $id);
 
         echo '<div class="text-center">';
-        echo anchor('projects-tasks/list/'.$slug, 'Cancel', array('class'=>'button alt'));
+        echo anchor('project/'.$slug, 'Cancel', array('class'=>'button alt'));
         if ($slug > 0) {
-            echo anchor('projects/confirm_delete/'.$slug, 'Delete project', array('class'=>'button danger'));
+            echo anchor('project/'.$slug.'/confirm_delete', 'Delete project', array('class'=>'button danger'));
         }
         echo form_submit('submit', 'Submit');
         echo '</div>';

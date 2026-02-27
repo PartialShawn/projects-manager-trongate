@@ -1,8 +1,8 @@
 <h1>Manage Tasks</h1>
 <?= flashdata() ?>
 <p>
-    <?= anchor('projects-tasks/edit/'.$slug, 'Create New Task', array('class'=>'button alt')) ?>
-    <?= anchor('projects/edit/'.$slug, 'Edit Project', array('class'=>'button alt')) ?>
+    <?= anchor("project/{$slug}/task", 'Create New Task', array('class'=>'button alt')) ?>
+    <?= anchor("project/{$slug}/edit", 'Edit Project', array('class'=>'button alt')) ?>
 </p>
 
 <?php
@@ -23,7 +23,7 @@ if (empty($tasks)) {
         foreach($tasks as $task) { ?>
         <tr>
             <td class="text-center"><?= $task->status_icon ?></td>
-            <td><?= anchor('projects-tasks/edit/'.$slug.'/'.$task->id, out($task->task_title)) ?>: <?= out($task->description) ?></td>
+            <td><?= anchor("project/{$slug}/task/{$task->id}", out($task->task_title)) ?>: <?= out($task->description) ?></td>
         </tr>
         <?php
         }

@@ -9,7 +9,11 @@
 class Projects extends Trongate {
 
     public function index(): void {
-        redirect('projects/list');
+        $this->list();
+    }
+
+    public function project(): void {
+        redirect('projects');
     }
 
     /** Display a list of projects.
@@ -79,7 +83,7 @@ class Projects extends Trongate {
                 $this->db->update($data['id'], $data, 'projects');
                 set_flashdata('The project was successfully updated.');
             }
-            redirect('projects');
+            redirect('project/'.$data['slug']);
         } else {
             $this->edit();
         }
@@ -112,6 +116,6 @@ class Projects extends Trongate {
         $id = (int) post('id');
         $this->db->delete($id, 'projects');
         set_flashdata('The project record was successfully deleted.');
-        redirect('projects/list');
+        redirect('projects');
     }
 }

@@ -15,7 +15,7 @@ if (empty($projects)) {
     foreach($projects as $project) { ?>
     <div class="card" style="width: 30%; margin-right: 3%;">
         <div class="card-heading">
-            <?= anchor('projects-tasks/list/'.out($project->slug), out($project->project_title), ['style'=>'color: white;']) ?>
+            <?= anchor('project/'.out($project->slug), out($project->project_title), ['style'=>'color: white;']) ?>
         </div>
         <div class="card-body text-center">
             <p><?= out($project->description) ?></p>
