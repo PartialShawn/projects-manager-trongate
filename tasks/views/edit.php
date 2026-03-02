@@ -5,25 +5,25 @@
         echo form_open($form_location, array('class'=>'highlight-errors'));
         echo form_hidden('slug', $slug);
 
-        echo form_label('Task Title');
+        echo form_label(_l('task title'));
         echo validation_errors('task_title');
-        echo form_input('task_title', $task_title, array('placeholder'=>'Task title', 'autocomplete'=>'off'));
+        echo form_input('task_title', $task_title, array('placeholder'=>_l('task title placeholder'), 'autocomplete'=>'off'));
 
-        echo form_label('Description');
+        echo form_label(_l('task description'));
         echo validation_errors('description');
-        echo form_textarea('description', $description, array('placeholder'=>'Enter task details here'));
+        echo form_textarea('description', $description, array('placeholder'=>_l('task title')));
 
         echo '<label>';
         echo form_checkbox('complete', 1, $complete);
-        echo 'task complete';
+        echo _l('task complete');
         echo '</label>';
 
         echo '<div class="text-center">';
-        echo anchor("project/{$slug}", 'Cancel', array('class'=>'button alt'));
+        echo anchor($_GET['lang']."/project/{$slug}", _l('cancel'), array('class'=>'button alt'));
         if ($update_id > 0) {
-            echo anchor("project/{$slug}/task/{$update_id}/confirm_delete", 'Delete Task', array('class'=>'button danger'));
+            echo anchor($_GET['lang']."/project/{$slug}/task/{$update_id}/confirm_delete", _l('delete task'), array('class'=>'button danger'));
         }
-        echo form_submit('submit', 'Submit');
+        echo form_submit('submit', _l('update task'));
         echo '</div>';
 
 

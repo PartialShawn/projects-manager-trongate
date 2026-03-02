@@ -1,6 +1,6 @@
-<h1>Projects</h1>
+<h1><?= _l('projects') ?></h1>
 <?= flashdata() ?>
-<p><?= anchor('projects/edit', 'Create New Project', array('class'=>'button alt')) ?></p>
+<p><?= anchor($_GET['lang'].'/projects/edit', _l('create project button'), array('class'=>'button alt')) ?></p>
 
 <?php
 if (empty($projects)) {
@@ -15,7 +15,7 @@ if (empty($projects)) {
     foreach($projects as $project) { ?>
     <div class="card" style="width: 30%; margin-right: 3%;">
         <div class="card-heading">
-            <?= anchor('project/'.out($project->slug), out($project->project_title), ['style'=>'color: white;']) ?>
+            <?= anchor($_GET['lang'].'/project/'.out($project->slug), out($project->project_title), ['style'=>'color: white;']) ?>
         </div>
         <div class="card-body text-center">
             <p><?= out($project->description) ?></p>

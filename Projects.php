@@ -13,7 +13,7 @@ class Projects extends Trongate {
     }
 
     public function project(): void {
-        redirect('projects');
+        redirect($_GET['lang'].'/projects');
     }
 
     /** Display a list of projects.
@@ -24,6 +24,7 @@ class Projects extends Trongate {
         $this->trongate_security->make_sure_allowed();
 
         $data = [
+            'page_title' => _l('projects').' - '.WEBSITE_NAME,
             'projects'=>$this->model->fetch_projects(),
             'view_module'=>'projects',
             'view_file'=>'list'
@@ -44,10 +45,12 @@ class Projects extends Trongate {
 
         if ($current_slug==='' || $submit==='submit') {
             $data = $this->model->get_data_from_post();
-            $data['headline'] = 'Create Project';
+            $data['headline'] = _l('create project button');
+            $data['page_title'] = _l('create project button');
         } else {
             $data = $this->model->get_data_from_db($current_slug);
-            $data['headline'] = 'Update Project';
+            $data['headline'] = _l('update project');
+            $data['page_title'] = $data['project_title'].' - '._l('update project');
         }
 
         $data['form_location'] = str_replace('/edit', '/submit', current_url());
@@ -83,7 +86,7 @@ class Projects extends Trongate {
                 $this->db->update($data['id'], $data, 'projects');
                 set_flashdata('The project was successfully updated.');
             }
-            redirect('project/'.$data['slug']);
+            redirect($_GET['lang'].'/project/'.$data['slug']);
         } else {
             $this->edit();
         }
@@ -115,7 +118,7 @@ class Projects extends Trongate {
 
         $id = (int) post('id');
         $this->db->delete($id, 'projects');
-        set_flashdata('The project record was successfully deleted.');
-        redirect('projects');
+        set_flashdata(_l('project deleted message'));
+        redirect($_GET['lang'].'/projects');
     }
 }
