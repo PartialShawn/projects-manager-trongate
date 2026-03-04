@@ -19,10 +19,12 @@ class Tasks extends Trongate {
     public function list(): void {
         $this->trongate_security->make_sure_allowed();
         $slug = segment(3);
+        $project = $this->model->get_project($slug);
 
         $data = [
-            'page_title'=>_l('tasks').' - '.WEBSITE_NAME,
-            'tasks'=>$this->model->fetch_tasks($slug),
+            'page_title'=>_l('tasks').' - '.$project['project_title'].' - '.WEBSITE_NAME,
+            'project'=>$project['project_title'],
+            'tasks'=>$this->model->fetch_tasks($project['id']),
             'slug'=>$slug,
             'view_module'=>'projects/tasks',
             'view_file'=>'list'
@@ -41,17 +43,19 @@ class Tasks extends Trongate {
         $slug = segment(3);
         $update_id = segment(4, 'int');
         $submit = post('submit');
+        $project = $this->model->get_project($slug);
 
         if ($update_id===0 || $submit==='submit') {
             $data = $this->model->get_data_from_post();
-            $data['headline'] = _l('create task');
-            $data['page_title'] = _l('create task').' -1 '.WEBSITE_NAME;
+            $data['headline'] = _l('task create');
+            $data['page_title'] = _l('task create').' &centerdot; '.WEBSITE_NAME;
         } else {
             $data = $this->model->get_data_from_db($update_id);
-            $data['headline'] = _l('update task');
-            $data['page_title'] = $data['task_title'].' - '._l('update task').' 1- '.WEBSITE_NAME;
+            $data['headline'] = _l('task update');
+            $data['page_title'] = $data['task_title'].' &centerdot; '._l('task update').' &centerdot; '.WEBSITE_NAME;
         }
 
+        $data['project'] = $project['project_title'];
         $data['slug'] = $slug;
         $data['update_id'] = $update_id;
         // $data['form_location'] = str_replace('/edit', '/submit', current_url());

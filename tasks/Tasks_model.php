@@ -34,7 +34,7 @@ class Tasks_model extends Model {
 
         if ($record_obj===false) {
             http_response_code(404);
-            echo 'Task not found';
+            echo _l('task not found');
             die;
         }
 
@@ -44,19 +44,39 @@ class Tasks_model extends Model {
 
 
     /**
+     * Get project data from slug.
+     * 
+     * @param string $project_slug the slug of the project.
+     * 
+     * @return array project data.
+     */
+    public function get_project (string $proj_slug): array {
+        $result = $this->db->get_one_where('slug', $proj_slug, 'projects');
+
+        if ($result===false) {
+            http_response_code(404);
+            echo _l('project not found'). ': '.$proj_slug;
+            die;
+        }
+
+        $project = (array) $result;
+        return $project;
+    }
+
+
+    /**
      * Retrieve all task records from DB.
      * 
      * @return array<StdObj>
      */
-    public function fetch_tasks(string $proj_slug): array|false {
+    public function fetch_tasks(int $proj_id): array|false {
 
         $params = [
-            'slug' => $proj_slug
+            'proj_id' => $proj_id
         ];
 
-        $sql = 'SELECT t.* FROM projects_tasks AS t
-                LEFT JOIN projects AS p ON t.project_id = p.id
-                WHERE p.slug = :slug';
+        $sql = 'SELECT * FROM projects_tasks
+                WHERE project_id = :proj_id';
         $tasks = $this->db->query_bind($sql, $params, 'object');
 
         if (empty($tasks)) {

@@ -21,9 +21,9 @@
         echo '<div class="text-center">';
         echo anchor($_GET['lang'].'/project/'.$slug, _l('cancel'), array('class'=>'button alt'));
         if ($slug > 0) {
-            echo anchor($_GET['lang'].'/project/'.$slug.'/confirm_delete', _l('delete project'), array('class'=>'button danger'));
+            echo anchor($_GET['lang'].'/project/'.$slug.'/confirm_delete', _l('project delete button'), array('class'=>'button danger'));
         }
-        echo form_submit('submit', _l('create project button'));
+        echo form_submit('submit', _l('project create button'));
         echo '</div>';
 
 

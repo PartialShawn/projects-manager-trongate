@@ -45,12 +45,12 @@ class Projects extends Trongate {
 
         if ($current_slug==='' || $submit==='submit') {
             $data = $this->model->get_data_from_post();
-            $data['headline'] = _l('create project button');
-            $data['page_title'] = _l('create project button');
+            $data['headline'] = _l('project create button');
+            $data['page_title'] = _l('project create button');
         } else {
             $data = $this->model->get_data_from_db($current_slug);
-            $data['headline'] = _l('update project');
-            $data['page_title'] = $data['project_title'].' - '._l('update project');
+            $data['headline'] = _l('project update button');
+            $data['page_title'] = $data['project_title'].' - '._l('project update button');
         }
 
         $data['form_location'] = str_replace('/edit', '/submit', current_url());

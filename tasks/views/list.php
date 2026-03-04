@@ -1,8 +1,8 @@
 <h1><?= _l('tasks') ?></h1>
 <?= flashdata() ?>
 <p>
-    <?= anchor($_GET['lang']."/project/{$slug}/task", _l('create task'), array('class'=>'button alt')) ?>
-    <?= anchor($_GET['lang']."/project/{$slug}/edit", _l('edit project button'), array('class'=>'button alt')) ?>
+    <?= anchor($_GET['lang']."/project/{$slug}/task", _l('task create'), array('class'=>'button alt')) ?>
+    <?= anchor($_GET['lang']."/project/{$slug}/edit", _l('project edit button'), array('class'=>'button alt')) ?>
 </p>
 
 <?php
@@ -14,8 +14,8 @@ if (empty($tasks)) {
 <table>
     <thead>
         <tr>
-            <th><?= _l('status column') ?></th>
-            <th><?= _l('task column') ?></th>
+            <th><?= _l('task status column') ?></th>
+            <th><?= _l('task title column') ?></th>
         </tr>
     </thead>
     <tbody>

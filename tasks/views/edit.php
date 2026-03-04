@@ -21,9 +21,11 @@
         echo '<div class="text-center">';
         echo anchor($_GET['lang']."/project/{$slug}", _l('cancel'), array('class'=>'button alt'));
         if ($update_id > 0) {
-            echo anchor($_GET['lang']."/project/{$slug}/task/{$update_id}/confirm_delete", _l('delete task'), array('class'=>'button danger'));
+            echo anchor($_GET['lang']."/project/{$slug}/task/{$update_id}/confirm_delete", _l('task delete'), array('class'=>'button danger'));
+            echo form_submit('submit', _l('task update'));
+        } else {
+            echo form_submit('submit', _l('task create'));
         }
-        echo form_submit('submit', _l('update task'));
         echo '</div>';
 
 

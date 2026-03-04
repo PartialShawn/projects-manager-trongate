@@ -1,6 +1,6 @@
 <h1><?= _l('projects') ?></h1>
 <?= flashdata() ?>
-<p><?= anchor($_GET['lang'].'/projects/edit', _l('create project button'), array('class'=>'button alt')) ?></p>
+<p><?= anchor($_GET['lang'].'/projects/edit', _l('project create button'), array('class'=>'button alt')) ?></p>
 
 <?php
 if (empty($projects)) {
